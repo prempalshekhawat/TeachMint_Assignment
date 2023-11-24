@@ -1,12 +1,9 @@
 package com.prempal.teachmintassignment.di
 
 import com.google.gson.GsonBuilder
-import com.prempal.teachmintassignment.network.ApiService
-import com.prempal.teachmintassignment.network.GitHubApiService
-import com.prempal.teachmintassignment.repository.DefaultGitHubRepository
-import com.prempal.teachmintassignment.repository.DefaultItemRepository
-import com.prempal.teachmintassignment.repository.GitHubRepository
-import com.prempal.teachmintassignment.repository.MovieRepository
+import com.prempal.teachmintassignment.data.remote.MainService
+import com.prempal.teachmintassignment.data.repository.MainRepositoryImpl
+import com.prempal.teachmintassignment.data.repository.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +17,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    var gson = GsonBuilder()
+    val gson = GsonBuilder()
         .setLenient()
         .create()
 
@@ -28,7 +25,6 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-//            .baseUrl("https://www.howtodoandroid.com/apis/")
             .baseUrl("https://api.github.com/search/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -36,26 +32,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideGitHubApiService(retrofit: Retrofit): MainService {
+        return retrofit.create(MainService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideItemRepository(apiService: ApiService): MovieRepository {
-        return DefaultItemRepository(apiService)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGitHubApiService(retrofit: Retrofit): GitHubApiService {
-        return retrofit.create(GitHubApiService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGitHubRepository(apiService: GitHubApiService): GitHubRepository {
-        return DefaultGitHubRepository(apiService)
+    fun provideGitHubRepository(apiService: MainService): MainRepository {
+        return MainRepositoryImpl(apiService)
     }
 
 }

@@ -1,12 +1,17 @@
-package com.prempal.teachmintassignment.data
+package com.prempal.teachmintassignment.data.remote.response
 
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 
 @Keep
-data class GitSearchResponse(
-    var incomplete_results: Boolean? = null,
+data class MainResponse(
+    //Todo: SerializedName Impl pending
+    @SerializedName("incomplete_results")
+    var incompleteResults: Boolean? = null,
+
     var items: List<Item>? = null,
+
     var total_count: Int? = null
 ) {
     @Keep

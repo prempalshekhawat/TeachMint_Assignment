@@ -88,11 +88,6 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    //Paging
-    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
-//    implementation("com.google.accompanist:accompanist-pager:0.18.0")
-//    implementation("com.google.accompanist:accompanist-pager-gestures:0.18.0")
-
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -107,6 +102,9 @@ dependencies {
 //    implementation("androidx.room:room-runtime:$roomversion")
 //    implementation("androidx.room:room-ktx:$roomversion")
 //    kapt("androidx.room:room-compiler:$roomversion")
+
+    implementation("androidx.paging:paging-runtime:3.2.0-alpha06")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha20")
 }
 
 kapt {
