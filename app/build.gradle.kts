@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-//    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
 //    id("com.google.devtools.ksp")
@@ -98,11 +97,12 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.2.2")
 
     //room
-//    val roomversion = "2.5.2"
-//    implementation("androidx.room:room-runtime:$roomversion")
-//    implementation("androidx.room:room-ktx:$roomversion")
-//    kapt("androidx.room:room-compiler:$roomversion")
+    val roomversion = "2.5.2"
+    implementation("androidx.room:room-runtime:$roomversion")
+    implementation("androidx.room:room-ktx:$roomversion")
+    kapt("androidx.room:room-compiler:$roomversion")
 
+    //paging
     implementation("androidx.paging:paging-runtime:3.2.0-alpha06")
     implementation("androidx.paging:paging-compose:1.0.0-alpha20")
 }

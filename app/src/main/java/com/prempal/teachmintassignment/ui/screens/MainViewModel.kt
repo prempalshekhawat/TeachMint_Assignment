@@ -1,5 +1,8 @@
 package com.prempal.teachmintassignment.ui.screens
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
@@ -16,12 +19,17 @@ class MainViewModel
 @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-    private var _query = ""
-    fun items() = repository.fetchRemoteRepositories(_query).cachedIn(viewModelScope)
+
+//    var query by mutableStateOf("")
+//    var data by mutableStateOf("")
+    fun items(searchQuery: String) = repository.fetchRemoteRepositories(searchQuery).cachedIn(viewModelScope)
+
+    fun debounceSearch() {
+        //Todo: debounce search api call
+    }
 
     fun updateQuery(query: String) {
-        _query = query
-        items()
+        items(query)
     }
 
 }
